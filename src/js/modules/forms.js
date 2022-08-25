@@ -1,7 +1,8 @@
 const forms = () => {
 
     const form = document.querySelectorAll('form'),
-        inputs = document.querySelectorAll('input');
+        inputs = document.querySelectorAll('input'),
+        upload = document.querySelectorAll('[name="upload"]');
 
     const message = {
         loading: "Загрузка...",
@@ -33,7 +34,22 @@ const forms = () => {
         inputs.forEach(element => {
             element.value = '';
         });
-    }
+        upload.forEach(element => {
+            element.previousElementSibling.text = "Файл не выбран";
+        });
+    };
+
+    upload.forEach(element => {
+        element.addEventListener('input', () => {
+            console.log(element.files[0]);
+            let dots;
+            const arr = element.files[0].name.split('.');
+
+            arr[0].length > 6 ? dots = "..." : dots = ".";
+            const name = arr[0].substring(0, 6) + dots + arr[1];
+            element.previousElementSibling.textContent = name;
+        });
+    });
 
     form.forEach(element => {
         element.addEventListener('submit', (e) => {
@@ -41,7 +57,7 @@ const forms = () => {
 
             let statusMasage = document.createElement('div');
             statusMasage.classList.add("status");
-            // картинка загрузки помещаем в родитель самой формы
+            // div с картинкой загрузки помещаем в родитель самой формы
             element.parentNode.appendChild(statusMasage);
 
             //скрываю форму(чтоб осталоaсь тоько каринка оповещения)
@@ -62,7 +78,7 @@ const forms = () => {
 
             const formData = new FormData(element);//собрал все данные
             let api;
-            element.closest('.popup-design') ? api = path.designer : api = path.question;
+            element.closest('.popup-design') || element.classList.contains('calc_form') ? api = path.designer : api = path.question;
 
             postData(api, formData)
                 .then(res => {
@@ -76,8 +92,11 @@ const forms = () => {
                 })
                 .finally(() => {
                     clearInputs();
-                    setInterval(() => {
+                    setTimeout(() => {
                         statusMasage.remove();
+                        element.style.display = 'block';
+                        element.classList.add('fadeOutUp');
+                        element.classList.add('fadeInUp');
                     }, 5000);
                 })
 
@@ -88,3 +107,4 @@ const forms = () => {
 
 
 export default forms;
+
