@@ -1,84 +1,77 @@
-const forms = () => {
+import { postData } from "../services/requests";
 
+const forms = () => {
     const form = document.querySelectorAll('form'),
         inputs = document.querySelectorAll('input'),
         upload = document.querySelectorAll('[name="upload"]');
 
     const message = {
-        loading: "Загрузка...",
-        success: "Спасибо мы с вами свяжемся",
-        failuere: "Что-то пошло не так...",
+        loading: 'Загрузка...',
+        success: 'Спасибо! Скоро мы с вами свяжемся',
+        failure: 'Что-то пошло не так...',
         spinner: 'assets/img/spinner.gif',
         ok: 'assets/img/ok.png',
         fail: 'assets/img/fail.png'
-
     };
 
     //в зависимости от формы отправляю данные на разные сервера
     const path = {
-        designer: 'assets/server.php',// для формы с классом popup-design
-        question: 'assets/question.php'//popup-consultation
-    }
-
-    const postData = async (url, data) => {
-        let res = await fetch(url, {
-            method: "POST",
-            body: data
-        });
-
-        return await res.text();
+        designer: 'assets/server.php',
+        question: 'assets/question.php'
     };
 
+    //function import from services/request.js
 
     const clearInputs = () => {
-        inputs.forEach(element => {
-            element.value = '';
+        inputs.forEach(item => {
+            item.value = '';
         });
-        upload.forEach(element => {
-            element.previousElementSibling.text = "Файл не выбран";
+        upload.forEach(item => {
+            item.previousElementSibling.textContent = "Файл не выбран";
         });
     };
 
-    upload.forEach(element => {
-        element.addEventListener('input', () => {
-            console.log(element.files[0]);
+    upload.forEach(item => {
+        item.addEventListener('input', () => {
+            // console.log(item.files[0]);
             let dots;
-            const arr = element.files[0].name.split('.');
+            const arr = item.files[0].name.split('.');
 
-            arr[0].length > 6 ? dots = "..." : dots = ".";
+            arr[0].length > 6 ? dots = "..." : dots = '.';
             const name = arr[0].substring(0, 6) + dots + arr[1];
-            element.previousElementSibling.textContent = name;
+            item.previousElementSibling.textContent = name;
         });
     });
 
-    form.forEach(element => {
-        element.addEventListener('submit', (e) => {
+    form.forEach(item => {
+        item.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            let statusMasage = document.createElement('div');
-            statusMasage.classList.add("status");
-            // div с картинкой загрузки помещаем в родитель самой формы
-            element.parentNode.appendChild(statusMasage);
+            let statusMessage = document.createElement('div');
+            statusMessage.classList.add('status');
+            // div для картинки загрузки помещаем в родитель самой формы
+            item.parentNode.appendChild(statusMessage);
 
             //скрываю форму(чтоб осталоaсь тоько каринка оповещения)
-            element.classList.add('animated', 'fadeOutUp');// класы из animate.css для прозрачности формы 
-            setTimeout(() => { //удаляю форму
-                element.style.display = 'none';
-            }, 4000);
-            //добавляю картинку загрузки 
+            item.classList.add('animated', 'fadeOutUp');
+            setTimeout(() => {
+                item.style.display = 'none';
+            }, 400);
+
+            // картинка
             let statusImg = document.createElement('img');
             statusImg.setAttribute('src', message.spinner);
             statusImg.classList.add('animated', 'fadeInUp');
-            statusMasage.appendChild(statusImg);
-
-            // добавляю текст к картинке
+            statusMessage.appendChild(statusImg);
+            //текст под картинкой
             let textMessage = document.createElement('div');
             textMessage.textContent = message.loading;
-            statusMasage.appendChild(textMessage);
+            statusMessage.appendChild(textMessage);
 
-            const formData = new FormData(element);//собрал все данные
+            const formData = new FormData(item);//собрал все данные
             let api;
-            element.closest('.popup-design') || element.classList.contains('calc_form') ? api = path.designer : api = path.question;
+            item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
+            // console.log(api);
 
             postData(api, formData)
                 .then(res => {
@@ -88,23 +81,19 @@ const forms = () => {
                 })
                 .catch(() => {
                     statusImg.setAttribute('src', message.fail);
-                    textMessage.textContent = message.failuere;
+                    textMessage.textContent = message.failure;
                 })
                 .finally(() => {
                     clearInputs();
                     setTimeout(() => {
-                        statusMasage.remove();
-                        element.style.display = 'block';
-                        element.classList.add('fadeOutUp');
-                        element.classList.add('fadeInUp');
+                        statusMessage.remove();
+                        item.style.display = 'block';
+                        item.classList.remove('fadeOutUp');
+                        item.classList.add('fadeInUp');
                     }, 5000);
-                })
-
-
+                });
         });
     });
 };
 
-
 export default forms;
-
