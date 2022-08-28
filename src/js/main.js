@@ -1,3 +1,4 @@
+import calculator from "./modules/calculator";
 import forms from "./modules/forms";
 import mask from "./modules/mask";
 import modals from "./modules/modal";
@@ -17,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     forms();
     mask('[name="phone"]');
     showStyles('.button-styles', '#styles .row');
+    calculator();
+
 
 
 });

@@ -3,7 +3,8 @@ import { postData } from "../services/requests";
 const forms = () => {
     const form = document.querySelectorAll('form'),
         inputs = document.querySelectorAll('input'),
-        upload = document.querySelectorAll('[name="upload"]');
+        upload = document.querySelectorAll('[name="upload"]'),
+        finalPriceBlock = document.querySelector('.calc-price');
 
     const message = {
         loading: 'Загрузка...',
@@ -85,6 +86,7 @@ const forms = () => {
                 })
                 .finally(() => {
                     clearInputs();
+                    finalPriceBlock.textContent = 'Для расчета нужно выбрать размер картины и материал картины';
                     setTimeout(() => {
                         statusMessage.remove();
                         item.style.display = 'block';
