@@ -96,11 +96,13 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_calculator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/calculator */ "./src/js/modules/calculator.js");
-/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
-/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
-/* harmony import */ var _modules_showStyles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/showStyles */ "./src/js/modules/showStyles.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_filterImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/filterImg */ "./src/js/modules/filterImg.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
+/* harmony import */ var _modules_showStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showStyles */ "./src/js/modules/showStyles.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+
 
 
 
@@ -110,15 +112,16 @@ __webpack_require__.r(__webpack_exports__);
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_3__["default"])('.button-design', '.popup-design', '.popup-close');
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_3__["default"])('.button-consultation', '.popup-consultation', '.popup-close');
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_3__["default"])('.fixed-gift', '.popup-gift', '.popup-close', true);
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_5__["default"])('.main-slider-item', 'vertical');
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_5__["default"])('.feedback-slider-item', '', '.main-prev-btn', '.main-next-btn');
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  Object(_modules_mask__WEBPACK_IMPORTED_MODULE_2__["default"])('[name="phone"]');
-  Object(_modules_showStyles__WEBPACK_IMPORTED_MODULE_4__["default"])('.button-styles', '#styles .row');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_4__["default"])('.button-design', '.popup-design', '.popup-close');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_4__["default"])('.button-consultation', '.popup-consultation', '.popup-close');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_4__["default"])('.fixed-gift', '.popup-gift', '.popup-close', true);
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.main-slider-item', 'vertical');
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.feedback-slider-item', '', '.main-prev-btn', '.main-next-btn');
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  Object(_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="phone"]');
+  Object(_modules_showStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-styles', '#styles .row');
   Object(_modules_calculator__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  Object(_modules_filterImg__WEBPACK_IMPORTED_MODULE_1__["default"])();
 });
 
 /***/ }),
@@ -161,17 +164,18 @@ const calculator = () => {
       switch (size.value) {
         case '40x50':
           sizePrice = responce[0]["40x50"];
-          console.log(sizePrice);
           break;
 
         case '50x70':
           sizePrice = responce[0]["50x70"];
-          console.log(sizePrice);
           break;
 
         case '70x70':
           sizePrice = responce[0]["70x70"];
-          console.log(sizePrice);
+          break;
+
+        default:
+          sizePrice = false;
           break;
       }
 
@@ -184,17 +188,18 @@ const calculator = () => {
       switch (material.value) {
         case 'Холст из волокна':
           materialPrice = responce[1]["Холст из волокна"];
-          console.log(materialPrice);
           break;
 
         case 'Льняной холст':
           materialPrice = responce[1]["Льняной холст"];
-          console.log(materialPrice);
           break;
 
         case 'Холст из натурального хлопка':
           materialPrice = responce[1]["Холст из натурального хлопка"];
-          console.log(materialPrice);
+          break;
+
+        default:
+          materialPrice = false;
           break;
       }
 
@@ -207,16 +212,18 @@ const calculator = () => {
       switch (options.value) {
         case 'Покрытие арт-гелем':
           optionsPrice = responce[2]["Покрытие арт-гелем"];
-          console.log(optionsPrice);
           break;
 
         case 'Экспресс-изготовление':
           optionsPrice = responce[2]["Экспресс-изготовление"];
-          console.log(optionsPrice);
           break;
 
         case 'Доставка готовых работ':
           optionsPrice = responce[2]["Доставка готовых работ"];
+          break;
+
+        default:
+          optionsPrice = false;
           break;
       }
 
@@ -248,6 +255,52 @@ const calculator = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (calculator);
+
+/***/ }),
+
+/***/ "./src/js/modules/filterImg.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/filterImg.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const filterImg = () => {
+  const menu = document.querySelector('.portfolio-menu'),
+        items = menu.querySelectorAll('li'),
+        wrapper = document.querySelector('.portfolio-wrapper'),
+        markAll = wrapper.querySelectorAll('.all'),
+        no = document.querySelector('.portfolio-no');
+  menu.addEventListener('click', e => {
+    let target = e.target;
+
+    if (target && target.tagName == "LI") {
+      markAll.forEach(mark => {
+        mark.style.display = 'none';
+        mark.classList.remove('animated', 'fadeIn');
+      });
+      no.style.display = "none";
+      no.classList.remove('animated', 'fadeIn');
+      let activeBtnClass = target.classList.value;
+      items.forEach(btn => btn.classList.remove('active'));
+      target.classList.add('active');
+      markAll.forEach(mark => {
+        if (mark.classList.contains(activeBtnClass)) {
+          //так как у таба и картинок есть одинаковый класс 
+          mark.style.display = 'block';
+          mark.classList.add('animated', 'fadeIn');
+        } else if (activeBtnClass == 'grandmother' || activeBtnClass == 'granddad') {
+          no.style.display = 'block';
+          no.classList.add('fadeIn');
+        }
+      });
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (filterImg);
 
 /***/ }),
 

@@ -36,16 +36,15 @@ const calculator = () => {
             switch (size.value) {
                 case '40x50':
                     sizePrice = responce[0]["40x50"];
-                    console.log(sizePrice);
                     break;
                 case '50x70':
                     sizePrice = responce[0]["50x70"];
-                    console.log(sizePrice);
                     break;
                 case '70x70':
                     sizePrice = responce[0]["70x70"];
-                    console.log(sizePrice);
                     break;
+                default: sizePrice = false;
+                    break
             };
         }
     }
@@ -55,16 +54,15 @@ const calculator = () => {
             switch (material.value) {
                 case 'Холст из волокна':
                     materialPrice = responce[1]["Холст из волокна"];
-                    console.log(materialPrice);
                     break;
                 case 'Льняной холст':
                     materialPrice = responce[1]["Льняной холст"];
-                    console.log(materialPrice);
                     break;
                 case 'Холст из натурального хлопка':
                     materialPrice = responce[1]["Холст из натурального хлопка"];
-                    console.log(materialPrice);
                     break;
+                default: materialPrice = false;
+                    break
             };
         }
     }
@@ -74,15 +72,15 @@ const calculator = () => {
             switch (options.value) {
                 case 'Покрытие арт-гелем':
                     optionsPrice = responce[2]["Покрытие арт-гелем"];
-                    console.log(optionsPrice);
                     break;
                 case 'Экспресс-изготовление':
                     optionsPrice = responce[2]["Экспресс-изготовление"];
-                    console.log(optionsPrice);
                     break;
                 case 'Доставка готовых работ':
                     optionsPrice = responce[2]["Доставка готовых работ"];
                     break;
+                default: optionsPrice = false;
+                    break
             };
         }
     }

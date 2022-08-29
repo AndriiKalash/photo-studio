@@ -1,4 +1,5 @@
 import calculator from "./modules/calculator";
+import filterImg from "./modules/filterImg";
 import forms from "./modules/forms";
 import mask from "./modules/mask";
 import modals from "./modules/modal";
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mask('[name="phone"]');
     showStyles('.button-styles', '#styles .row');
     calculator();
+    filterImg();
 
 
 
