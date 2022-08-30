@@ -1,4 +1,5 @@
 import calculator from "./modules/calculator";
+import changeImg from "./modules/changeImg";
 import filterImg from "./modules/filterImg";
 import forms from "./modules/forms";
 import mask from "./modules/mask";
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showStyles('.button-styles', '#styles .row');
     calculator();
     filterImg();
+    changeImg('.sizes-block');
 
 
 

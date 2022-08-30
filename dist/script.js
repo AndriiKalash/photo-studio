@@ -96,12 +96,14 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_calculator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/calculator */ "./src/js/modules/calculator.js");
-/* harmony import */ var _modules_filterImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/filterImg */ "./src/js/modules/filterImg.js");
-/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
-/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
-/* harmony import */ var _modules_showStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showStyles */ "./src/js/modules/showStyles.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_changeImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/changeImg */ "./src/js/modules/changeImg.js");
+/* harmony import */ var _modules_filterImg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/filterImg */ "./src/js/modules/filterImg.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
+/* harmony import */ var _modules_showStyles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/showStyles */ "./src/js/modules/showStyles.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+
 
 
 
@@ -112,16 +114,17 @@ __webpack_require__.r(__webpack_exports__);
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_4__["default"])('.button-design', '.popup-design', '.popup-close');
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_4__["default"])('.button-consultation', '.popup-consultation', '.popup-close');
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_4__["default"])('.fixed-gift', '.popup-gift', '.popup-close', true);
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.main-slider-item', 'vertical');
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.feedback-slider-item', '', '.main-prev-btn', '.main-next-btn');
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])();
-  Object(_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="phone"]');
-  Object(_modules_showStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-styles', '#styles .row');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-design', '.popup-design', '.popup-close');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-consultation', '.popup-consultation', '.popup-close');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_5__["default"])('.fixed-gift', '.popup-gift', '.popup-close', true);
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_7__["default"])('.main-slider-item', 'vertical');
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_7__["default"])('.feedback-slider-item', '', '.main-prev-btn', '.main-next-btn');
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
+  Object(_modules_showStyles__WEBPACK_IMPORTED_MODULE_6__["default"])('.button-styles', '#styles .row');
   Object(_modules_calculator__WEBPACK_IMPORTED_MODULE_0__["default"])();
-  Object(_modules_filterImg__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  Object(_modules_filterImg__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  Object(_modules_changeImg__WEBPACK_IMPORTED_MODULE_1__["default"])('.sizes-block');
 });
 
 /***/ }),
@@ -255,6 +258,48 @@ const calculator = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (calculator);
+
+/***/ }),
+
+/***/ "./src/js/modules/changeImg.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/changeImg.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const changeImg = bloks => {
+  const imgwrapper = document.querySelectorAll(bloks);
+
+  function fullImg(block) {
+    let img = block.querySelector('img');
+    img.src = img.src.slice(0, -4) + '-1.png';
+    block.querySelectorAll('p:not(.sizes-hit)').forEach(p => {
+      p.style.display = "none";
+    });
+  }
+
+  function emptyImg(block) {
+    let img = block.querySelector('img');
+    img.src = img.src.slice(0, -6) + '.png';
+    block.querySelectorAll('p:not(.sizes-hit)').forEach(p => {
+      p.style.display = "";
+    });
+  }
+
+  imgwrapper.forEach(block => {
+    block.addEventListener('mouseover', () => {
+      fullImg(block);
+    });
+    block.addEventListener('mouseout', () => {
+      emptyImg(block);
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (changeImg);
 
 /***/ }),
 
