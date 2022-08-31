@@ -95,14 +95,18 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_calculator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/calculator */ "./src/js/modules/calculator.js");
-/* harmony import */ var _modules_changeImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/changeImg */ "./src/js/modules/changeImg.js");
-/* harmony import */ var _modules_filterImg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/filterImg */ "./src/js/modules/filterImg.js");
-/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
-/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
-/* harmony import */ var _modules_showStyles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/showStyles */ "./src/js/modules/showStyles.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
+/* harmony import */ var _modules_calculator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/calculator */ "./src/js/modules/calculator.js");
+/* harmony import */ var _modules_changeImg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/changeImg */ "./src/js/modules/changeImg.js");
+/* harmony import */ var _modules_filterImg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/filterImg */ "./src/js/modules/filterImg.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
+/* harmony import */ var _modules_showStyles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/showStyles */ "./src/js/modules/showStyles.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+
+
 
 
 
@@ -114,18 +118,102 @@ __webpack_require__.r(__webpack_exports__);
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-design', '.popup-design', '.popup-close');
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-consultation', '.popup-consultation', '.popup-close');
-  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_5__["default"])('.fixed-gift', '.popup-gift', '.popup-close', true);
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_7__["default"])('.main-slider-item', 'vertical');
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_7__["default"])('.feedback-slider-item', '', '.main-prev-btn', '.main-next-btn');
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
-  Object(_modules_showStyles__WEBPACK_IMPORTED_MODULE_6__["default"])('.button-styles', '#styles .row');
-  Object(_modules_calculator__WEBPACK_IMPORTED_MODULE_0__["default"])();
-  Object(_modules_filterImg__WEBPACK_IMPORTED_MODULE_2__["default"])();
-  Object(_modules_changeImg__WEBPACK_IMPORTED_MODULE_1__["default"])('.sizes-block');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_7__["default"])('.button-design', '.popup-design', '.popup-close');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_7__["default"])('.button-consultation', '.popup-consultation', '.popup-close');
+  Object(_modules_modal__WEBPACK_IMPORTED_MODULE_7__["default"])('.fixed-gift', '.popup-gift', '.popup-close', true);
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_9__["default"])('.main-slider-item', 'vertical');
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_9__["default"])('.feedback-slider-item', '', '.main-prev-btn', '.main-next-btn');
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  Object(_modules_mask__WEBPACK_IMPORTED_MODULE_6__["default"])('[name="phone"]');
+  Object(_modules_showStyles__WEBPACK_IMPORTED_MODULE_8__["default"])('.button-styles', '#styles .row');
+  Object(_modules_calculator__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  Object(_modules_filterImg__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  Object(_modules_changeImg__WEBPACK_IMPORTED_MODULE_3__["default"])('.sizes-block');
+  Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_0__["default"])('.accordion-heading', '.accordion-block');
+  Object(_modules_burger__WEBPACK_IMPORTED_MODULE_1__["default"])('.burger', '.burger-menu');
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/accordion.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/accordion.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const accordion = (selectorTriger, selectorBlocks) => {
+  const trigers = document.querySelectorAll(selectorTriger),
+        blocks = document.querySelectorAll(selectorBlocks);
+  trigers.forEach(triger => {
+    triger.addEventListener('click', function () {
+      if (!this.classList.contains('active')) {
+        trigers.forEach(triger => {
+          triger.classList.remove('active');
+          triger.nextElementSibling.classList.remove('block-active');
+          triger.nextElementSibling.style.maxHeight = '0px';
+        });
+        this.classList.add('active');
+        this.nextElementSibling.classList.add('block-active');
+        this.nextElementSibling.style.maxHeight = this.nextElementSibling.scrollHeight + 80 + 'px';
+      } else {
+        this.classList.remove('active');
+        this.nextElementSibling.classList.remove('block-active');
+        this.nextElementSibling.style.maxHeight = '0px';
+      }
+    });
+  }); // blocks.forEach(block => {
+  //     block.classList.add('animated', 'fadeInDown');
+  // });
+  // trigers.forEach(triger => {
+  //     triger.addEventListener('click', () => {
+  //         if (!triger.classList.contains('active')) {
+  //             trigers.forEach(triger => {
+  //                 triger.classList.remove('active');
+  //                 // triger.nextElementSibling.style.display = 'none' (задал в стилях)
+  //             });
+  //             triger.classList.add('active');
+  //             // triger.nextElementSibling.style.display = "block";
+  //         }
+  //     });
+  // });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (accordion);
+
+/***/ }),
+
+/***/ "./src/js/modules/burger.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/burger.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const burger = (selectorBurger, selectorMenu) => {
+  const burger = document.querySelector(selectorBurger),
+        menu = document.querySelector(selectorMenu);
+  menu.style.display = 'none';
+  burger.addEventListener('click', () => {
+    if (menu.style.display == "none" && window.screen.availWidth < 993) {
+      menu.style.display = 'block';
+    } else {
+      menu.style.display = 'none';
+    }
+  }); //  событие отслеживает изменения экрана 
+
+  window.addEventListener('resize', () => {
+    if (window.screen.availWidth > 992) {
+      menu.style.display = 'none';
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (burger);
 
 /***/ }),
 

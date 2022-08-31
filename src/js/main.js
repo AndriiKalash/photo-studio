@@ -1,3 +1,5 @@
+import accordion from "./modules/accordion";
+import burger from "./modules/burger";
 import calculator from "./modules/calculator";
 import changeImg from "./modules/changeImg";
 import filterImg from "./modules/filterImg";
@@ -23,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     calculator();
     filterImg();
     changeImg('.sizes-block');
+    accordion('.accordion-heading', '.accordion-block');
+    burger('.burger', '.burger-menu');
 
 
 
