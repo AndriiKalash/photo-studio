@@ -6,6 +6,7 @@ import filterImg from "./modules/filterImg";
 import forms from "./modules/forms";
 import mask from "./modules/mask";
 import modals from "./modules/modal";
+import scrolling from "./modules/scrolling";
 import showStyles from "./modules/showStyles";
 import slider from "./modules/slider";
 
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     changeImg('.sizes-block');
     accordion('.accordion-heading', '.accordion-block');
     burger('.burger', '.burger-menu');
+    scrolling('.pageup');
 
 
 
