@@ -2,6 +2,7 @@ import accordion from "./modules/accordion";
 import burger from "./modules/burger";
 import calculator from "./modules/calculator";
 import changeImg from "./modules/changeImg";
+import drop from "./modules/drop";
 import filterImg from "./modules/filterImg";
 import forms from "./modules/forms";
 import mask from "./modules/mask";
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     accordion('.accordion-heading', '.accordion-block');
     burger('.burger', '.burger-menu');
     scrolling('.pageup');
+    drop();
 
 
 

@@ -21,7 +21,7 @@ const forms = () => {
         question: 'assets/question.php'
     };
 
-    //function import from services/request.js
+    //function postData import from services/request.js 
 
     const clearInputs = () => {
         inputs.forEach(item => {
@@ -32,9 +32,10 @@ const forms = () => {
         });
     };
 
+    // для обычного выбора фото, (отдельно в файле drop задано для перетаскивания )
     upload.forEach(item => {
         item.addEventListener('input', () => {
-            // console.log(item.files[0]);
+            console.log(item.files[0]);
             let dots;
             const arr = item.files[0].name.split('.');
 
